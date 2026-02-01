@@ -1,60 +1,88 @@
-# ProDev Backend Engineering program
-## Program Overview
+# Social Media Feed Web Application
+## Executive Summary
 
-The ProDev Backend Engineering program is an intensive, production-focused curriculum designed to transform foundational coding skills into professional-grade systems architecture. This program isn't just about writing code; it’s about building scalable, resilient, and maintainable backend systems that power modern applications.
+This project follows a Rapid Application Development (RAD) approach to deliver a high-performance social networking platform. Built with a Django backend and an API GraphQL architecture, the system focuses on scalability, real-time interaction, and personalized content discovery.
+Project Goals
 
-## Tech Stack & Tooling
+    Post Management: Efficient APIs for creating and managing content.
 
-I’ve mastered a suite of tools that allow for rapid development without sacrificing performance.
-Category	                Technologies
-Language & Framework	    Python, Django
-API Architectures	        REST, GraphQL (Graphene)
-DevOps & Scaling	        Docker, CI/CD Pipelines (GitHub Actions/CircleCI)
-Data Layers	                PostgreSQL, Redis
+    Flexible Querying: Utilizing GraphQL for advanced data retrieval.
 
-## Key Backend Learnings
+    Scalability: Optimized database schemas to handle high-volume user interactions.
 
-1. Advanced API Design
+    Rapid Iteration: Continuous stakeholder feedback and incremental delivery.
 
-Beyond basic CRUD operations, I focused on building flexible APIs.
+## Technology Stack
+### Backend
 
-    REST APIs: Implementing robust filtering and pagination principles.
+    Framework: Django 
 
-    GraphQL: Optimizing query depth and solving the N+1 query problem to ensure efficient data fetching.
+    API Layer: GraphQL (via Graphene) with GraphQL Playground for testing 
 
-2. Database Architecture & Design
+    Database: PostgreSQL for relational data storage 
 
-I learned that a backend is only as good as its data layer.
+    Real-time: Django Channels for WebSockets 
 
-    Schema Design: Normalization vs. Denormalization depending on the use case.
+    Auth: Django REST Framework (utilities) and JWT (JSON Web Tokens) 
 
-    Indexing: Implementing Hash indexes to speed up query execution.
+### Infrastructure & DevOps
 
-3. High-Performance Patterns
+    Caching/Messaging: Redis (cache + pub/sub) 
 
-    Asynchronous Programming: Utilizing asyncio and Celery to handle long-running tasks (like email sending or image processing) without blocking the main thread.
+    Task Queue: Celery with RabbitMQ for background processing (emails, image processing) 
 
-    Caching Strategies: Implementing Write-Through and Cache-Aside patterns using Redis to reduce database load.
+    Containerization: Dockerized services 
 
-## PROJECT NEXSUS - Social Media Feed Backend 
+    Deployment: CI/CD pipelines with blue-green deployment strategies 
 
-### Technologies Used
-    Django: For backend development.
-    PostgreSQL: To store relational data efficiently.
-    GraphQL (Graphene): For flexible data queries.
-    GraphQL Playground: For testing APIs.
+## Key Features
+### 1. User & Identity Management
 
-### Key Features
-1. GraphQL APIs
+    Authentication: Login via email/password or OAuth (Google, Facebook).
 
-    Enable flexible querying of posts and interactions.
-    Provide resolvers for creating, fetching, and managing posts and interactions.
+    Profile Management: CRUD operations for profiles, photos, and preferences.
 
-2. Interaction Management
+    Access Control: Role-based access for Guests, Users, Moderators, and Admins.
 
-    Allow users to like, comment, and share posts.
-    Track interactions for analytics and feedback.
+### 2. Social Feed & Engagement
 
-3. API Testing
+    Content: Create, edit, and delete text, images, and video posts.
 
-    Publish a hosted GraphQL Playground for easy testing.
+    Interaction: Like, comment, reply, and share capabilities.
+
+    Personalization: AI-driven feed generation and hashtag/mention support.
+
+    Real-time Updates: In-app notifications and feed updates via WebSockets.
+
+### 3. Moderation & Safety
+
+    Reporting: Tools to report users or content.
+
+    Moderation Queues: Dedicated workflows for content review.
+
+    AI Filtering: Integration with external APIs for automated content filtering.
+
+## System Architecture
+
+The application client communicates exclusively through a single GraphQL endpoint (/graphql).
+
+    Validation: The Django GraphQL layer manages orchestration and data validation.
+
+    Business Logic: Decoupled via a dedicated service layer.
+
+    Background Jobs: Handled by Celery workers to ensure high performance.
+
+    Data Persistence: Relational data is stored in PostgreSQL, while Redis handles feed precomputation.
+
+## User Roles
+
+Role	        Description
+Guest	        Can view public content.
+User	        Create posts, engage with content, and react to posts.
+Moderator	    Content review and enforcement.
+Admin	        System management, publishing, and analytics.
+
+## Future Enhancements
+
+    Implementing Machine-Learning-based feed ranking.
+    Development of a monetization and ads platform.
